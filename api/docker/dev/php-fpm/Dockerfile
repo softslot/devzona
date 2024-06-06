@@ -8,7 +8,7 @@ COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr
 
 RUN install-php-extensions xdebug zip
 
-ENV PHP_IDE_CONFIG 'serverName=traning'
+ENV PHP_IDE_CONFIG 'serverName=devzona'
 
 COPY ./conf.d /usr/local/etc/php/conf.d
 
