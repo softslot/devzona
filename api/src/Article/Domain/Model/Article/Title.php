@@ -11,7 +11,12 @@ use Webmozart\Assert\Assert;
 #[ORM\Embeddable]
 final readonly class Title implements \Stringable
 {
-    #[ORM\Column(name: 'title', type: Types::STRING, length: 255)]
+    #[ORM\Column(
+        name: 'title',
+        type: Types::STRING,
+        length: 255,
+        nullable: false,
+    )]
     private string $value;
 
     public function __construct(string $value)

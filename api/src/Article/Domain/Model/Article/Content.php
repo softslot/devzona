@@ -11,7 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Embeddable]
 final readonly class Content implements \Stringable
 {
-    #[ORM\Column(name: 'content', type: Types::TEXT)]
+    #[ORM\Column(
+        name: 'content',
+        type: Types::TEXT,
+        nullable: false,
+    )]
     private string $value;
 
     public function __construct(string $value)

@@ -13,7 +13,11 @@ use Webmozart\Assert\Assert;
 final readonly class Id implements \Stringable
 {
     #[ORM\Id]
-    #[ORM\Column(name: 'id', type: Types::GUID)]
+    #[ORM\Column(
+        name: 'id',
+        type: Types::GUID,
+        nullable: false,
+    )]
     private string $value;
 
     public function __construct(string $value)

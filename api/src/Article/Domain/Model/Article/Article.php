@@ -12,28 +12,57 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: '`article_articles`')]
 class Article
 {
-    #[ORM\Embedded(class: Id::class, columnPrefix: false)]
+    #[ORM\Embedded(
+        class: Id::class,
+        columnPrefix: false,
+    )]
     private Id $id;
 
-    #[ORM\Column(type: Types::STRING, length: 36, enumType: Status::class)]
+    #[ORM\Column(
+        type: Types::STRING,
+        length: 36,
+        enumType: Status::class,
+    )]
     private Status $status;
 
-    #[ORM\Embedded(class: Title::class, columnPrefix: false)]
+    #[ORM\Embedded(
+        class: Title::class,
+        columnPrefix: false,
+    )]
     private Title $title;
 
-    #[ORM\Embedded(class: Content::class, columnPrefix: false)]
+    #[ORM\Embedded(
+        class: Content::class,
+        columnPrefix: false,
+    )]
     private Content $content;
 
-    #[ORM\Column(name: 'created_at', type: Types::DATETIME_IMMUTABLE)]
+    #[ORM\Column(
+        name: 'created_at',
+        type: Types::DATETIME_IMMUTABLE,
+        nullable: false,
+    )]
     private \DateTimeImmutable $createdAt;
 
-    #[ORM\Column(name: 'updated_at', type: Types::DATETIME_IMMUTABLE)]
+    #[ORM\Column(
+        name: 'updated_at',
+        type: Types::DATETIME_IMMUTABLE,
+        nullable: false,
+    )]
     private \DateTimeImmutable $updatedAt;
 
-    #[ORM\Column(name: 'published_at', type: Types::DATETIME_IMMUTABLE)]
+    #[ORM\Column(
+        name: 'published_at',
+        type: Types::DATETIME_IMMUTABLE,
+        nullable: true,
+    )]
     private ?\DateTimeImmutable $publishedAt = null;
 
-    #[ORM\Column(name: 'deleted_at', type: Types::DATETIME_IMMUTABLE)]
+    #[ORM\Column(
+        name: 'deleted_at',
+        type: Types::DATETIME_IMMUTABLE,
+        nullable: true,
+    )]
     private ?\DateTimeImmutable $deletedAt = null;
 
     public function __construct(
