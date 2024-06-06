@@ -1,5 +1,13 @@
+# Admin
+
 # Article
-create_article:
+admin_create_article:
     path: /api/admin/articles
-    controller: App\Article\Infrastructure\Http\Article\CreateArticleController::execute
+    controller: App\Article\Infrastructure\Http\Admin\Article\CreateArticleController::execute
     methods: POST
+
+admin_get_article:
+    path: /api/admin/articles/{id}
+    controller: App\Article\Infrastructure\Http\Admin\Article\GetArticleController::execute
+    methods: GET
+# Admin
