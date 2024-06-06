@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: api/docker/dev/nginx
+    volumes:
+      - ./api:/api
+    ports:
+      - "90:80"
+    depends_on:
+      - php-fpm
+    tty: true
+    restart: unless-stopped
+
+  php-fpm:
+    build:
+      context: api/docker/dev/php-fpm
+    volumes:
+      - ./api:/api
+    restart: unless-stopped
+    tty: true
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  php-cli:
+    build:
+      context: api/docker/dev/php-cli
+    volumes:
+      - ./api:/api
+    tty: true
+
+  postgres:
+    image: postgres:16.0-alpine3.17
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - devzona:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: homestead
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database
+    ports:
+      - "5455:5432"
+
+volumes:
+  devzona:
+    driver: local

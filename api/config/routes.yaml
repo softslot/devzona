@@ -1,0 +1,5 @@
+# Article
+create_article:
+    path: /api/admin/articles
+    controller: App\Article\Infrastructure\Http\Article\CreateArticleController::execute
+    methods: POST
