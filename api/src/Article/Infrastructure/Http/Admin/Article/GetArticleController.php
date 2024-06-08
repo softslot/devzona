@@ -8,7 +8,8 @@ use App\Article\Application\Exception\Article\ArticleNotFoundByIdException;
 use App\Article\Application\Query\Admin\GetArticle\GetArticleHandler;
 use App\Article\Application\Query\Admin\GetArticle\GetArticleQuery;
 use App\Shared\Infrastructure\Http\BaseController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Shared\Infrastructure\Http\Exception\BaseHttpException;
+use App\Shared\Infrastructure\Http\Exception\HttpException;
 
 final class GetArticleController extends BaseController
 {
@@ -17,21 +18,21 @@ final class GetArticleController extends BaseController
     ) {
     }
 
-    public function execute(string $id): JsonResponse
+    /**
+     * @throws BaseHttpException
+     */
+    public function execute(string $id): array
     {
         $query = new GetArticleQuery($id);
 
         try {
             $articleView = $this->getArticleHandler->handle($query);
         } catch (ArticleNotFoundByIdException $e) {
-            return $this->jsonError([
-                'code' => 404,
-                'message' => $e->getMessage(),
-            ]);
+            return throw new HttpException(404, $e->getMessage());
         }
 
-        return $this->jsonSuccess([
+        return [
             'article' => $articleView,
-        ]);
+        ];
     }
 }

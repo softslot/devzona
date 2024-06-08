@@ -1,4 +1,4 @@
-# Admin
+### Admin
 
 # Article
 admin_create_article:
@@ -10,4 +10,11 @@ admin_get_article:
     path: /api/admin/articles/{id}
     controller: App\Article\Infrastructure\Http\Admin\Article\GetArticleController::execute
     methods: GET
-# Admin
+
+admin_update_article:
+    path: /api/admin/articles/{id}
+    controller: App\Article\Infrastructure\Http\Admin\Article\UpdateArticleController::execute
+    methods: PATCH
+# Article
+
+### Admin

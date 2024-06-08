@@ -7,7 +7,7 @@ namespace App\Article\Infrastructure\Http\Admin\Article;
 use App\Article\Application\Command\Admin\CreateArticle\CreateArticleCommand;
 use App\Article\Application\Command\Admin\CreateArticle\CreateArticleHandler;
 use App\Shared\Infrastructure\Http\BaseController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Shared\Infrastructure\Http\Exception\BaseHttpException;
 use Symfony\Component\HttpFoundation\Request;
 
 final class CreateArticleController extends BaseController
@@ -17,13 +17,16 @@ final class CreateArticleController extends BaseController
     ) {
     }
 
-    public function execute(Request $request): JsonResponse
+    /**
+     * @throws BaseHttpException
+     */
+    public function execute(Request $request): array
     {
         $command = $this->createCommandFromRequest($request, CreateArticleCommand::class);
         $this->createArticleHandler->handle($command);
 
-        return $this->jsonSuccess([
+        return [
             'id' => $command->id,
-        ]);
+        ];
     }
 }

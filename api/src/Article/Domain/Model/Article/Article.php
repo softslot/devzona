@@ -80,6 +80,20 @@ class Article
         $this->status = Status::Draft;
     }
 
+    public function update(
+        ?Title $title = null,
+        ?Content $content = null,
+    ): void {
+        if ($title !== null) {
+            $this->title = $title;
+        }
+        if ($content !== null) {
+            $this->content = $content;
+        }
+
+        $this->updatedAt = new \DateTimeImmutable();
+    }
+
     public function getId(): Id
     {
         return $this->id;
@@ -90,29 +104,14 @@ class Article
         return $this->status;
     }
 
-    public function setStatus(Status $status): void
-    {
-        $this->status = $status;
-    }
-
     public function getTitle(): Title
     {
         return $this->title;
     }
 
-    public function setTitle(Title $title): void
-    {
-        $this->title = $title;
-    }
-
     public function getContent(): Content
     {
         return $this->content;
-    }
-
-    public function setContent(Content $content): void
-    {
-        $this->content = $content;
     }
 
     public function getCreatedAt(): \DateTimeImmutable
@@ -123,10 +122,5 @@ class Article
     public function getUpdatedAt(): \DateTimeImmutable
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
-    {
-        $this->updatedAt = $updatedAt;
     }
 }
